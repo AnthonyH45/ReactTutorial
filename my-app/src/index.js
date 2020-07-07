@@ -1,21 +1,66 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import './index.css';
+import './index.css'
 
+/*
 class Square extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: null,
+        };
+    }
+
     render() {
-        return ( // since we passed a prop in here, we can render it using this.props.value 
-            <button className="square">
-                {this.props.value * this.props.value}
+        return ( //onClick={() => alert('Click!')}>
+            <button 
+                className="square"
+                onClick={ () => this.props.onClick() }
+            > 
+                {this.state.value}
             </button>
+            // {this.props.value * this.props.value}
         );
     }
 }
+*/
+
+function Square(props) {
+    return (
+        <button className="square" onClick={props.onClick}>
+            {props.value}
+        </button>
+    )
+}
 
 class Board extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            squares: Array(9).fill(null),
+            xIsNext: true,
+        };
+    }
+
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        // i love ternary operators! `condition ? y : n`
+        squares[i] = this.state.xIsNext ? 'X' : 'O';
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext,
+        });
+    }
+
     renderSquare(i) {
         // we pass value={i} as a property to Square
-        return <Square value={i} />;
+        // return <Square value={i} />;
+        return (
+            <Square 
+                value={this.state.squares[i]}
+                onClick={() => this.handleClick(i)}
+            />
+        );
     }
 
     render() {
