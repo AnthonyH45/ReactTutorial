@@ -1,6 +1,8 @@
 # ReactTutorial
 following the react tutorial from their website
 
+https://reactjs.org/tutorial/tutorial.html
+
 
 # Nodes:
 - React is declarative, and builds UI from componenets, which seems like a struct or object with properties that returns a description that should be rendered via the `render()`
