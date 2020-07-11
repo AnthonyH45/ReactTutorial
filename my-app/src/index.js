@@ -24,7 +24,6 @@ class Square extends React.Component {
     }
 }
 */
-
 function Square(props) {
     return (
         <button className="square" onClick={props.onClick}>
@@ -123,6 +122,7 @@ class Game extends React.Component {
 
         let status;
         if (winner) { status = 'Winner: ' + winner; }
+        else if (this.state.stepNumber === 9) { status = 'Draw :('; }
         else { status = 'Next Player: ' + (this.state.xIsNext ? 'X' : 'O'); }
 
         return (
@@ -141,6 +141,51 @@ class Game extends React.Component {
         );
     }
 }
+
+/*class descriptiveStatulator extends React.Component {
+    constructor(props) {
+      super(props) 
+      this.state = {*/
+        /*data: 0, //props.sort(function (a,b) { return a - b; } ),
+        min: findMin(),
+        max: findMax(),
+        range: findRange(),
+        size: findSize(),
+        sum: findSum(),
+        mean: findMean(),
+        median: findMedian(),
+        mode: findMode(),
+        sd: findSD(),
+        Q1: findQ1(),
+        Q2: median,
+        Q3: findQ3(),
+        IQR: Q3 - Q1*/
+        /*name: 'a'
+      }
+    }*/
+
+    /*findMin() { return 0; }
+    findMax() { return 0; }
+    findRange() { return 0; }
+    findSize() { return 0; }
+    findMean() { return 0; }
+    findMedian() { return 0; }
+    findMode() { return 0; }
+    findSD() { return 0; }
+    findQ1() { return 0; }
+    findQ3() { return 0; }*/
+/*
+    render() {
+        return(
+            <div>
+            <div className="board-row">
+              {this.state.name}
+            </div>
+          </div>
+        );
+    }
+  }
+  */
 
 ReactDOM.render(
     <Game />,
