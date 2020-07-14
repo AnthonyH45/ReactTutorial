@@ -2,16 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import './index.css'
 
-/*
-function Square(props) {
-    return (
-        <button className="square" onClick={props.onClick}>
-            {props.value.val}
-        </button>
-    );
-}
-*/
-
 class Square extends React.Component {
     constructor(props) {
         super(props);
@@ -21,10 +11,10 @@ class Square extends React.Component {
             w: props.win,
             onc: props.onClick,
         };
+        console.log(this.state.n,this.state.val);
     }
 
     render() { 
-        console.log(this.state.n,this.state.val);
             return (
                 <button className={this.state.n} onClick={this.state.onc}>
                     {this.state.val}
@@ -46,7 +36,9 @@ class Game extends React.Component {
     }
 
     renderSquare(i,w) {
-        var n = "square";
+        var n = ( (w == null) ? "square" : ( (i === w[0] || i === w[1] || i === w[2]) ? "square-win" : "square" ) );
+        console.log(n);
+        
         if (w != null) { 
             if (i === w[0] || i === w[1] || i === w[2]) { 
                 n += "-win"; 
@@ -89,6 +81,7 @@ class Game extends React.Component {
     }
 
     render() {
+        console.log(1);
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
