@@ -11,10 +11,9 @@ class Square extends React.Component {
             w: props.win,
             onc: props.onClick,
         };
-        console.log(this.state.n,this.state.val);
     }
 
-    render() { 
+    render() {
             return (
                 <button className={this.state.n} onClick={this.state.onc}>
                     {this.state.val}
@@ -36,8 +35,7 @@ class Game extends React.Component {
     }
 
     renderSquare(i,w) {
-        var n = ( (w == null) ? "square" : ( (i === w[0] || i === w[1] || i === w[2]) ? "square-win" : "square" ) );
-        console.log(n);
+        var n = ( (w == null) ? "square" : ( (i === w[1] || i === w[2] || i === w[3]) ? "square-win" : "square" ) );
         
         if (w != null) { 
             if (i === w[0] || i === w[1] || i === w[2]) { 
@@ -81,7 +79,6 @@ class Game extends React.Component {
     }
 
     render() {
-        console.log(1);
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
