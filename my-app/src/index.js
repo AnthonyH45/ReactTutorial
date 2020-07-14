@@ -37,17 +37,13 @@ class Game extends React.Component {
     renderSquare(i,w) {
         var n = ( (w == null) ? "square" : ( (i === w[1] || i === w[2] || i === w[3]) ? "square-win" : "square" ) );
         
-        if (w != null) { 
-            if (i === w[0] || i === w[1] || i === w[2]) { 
-                n += "-win"; 
-            }
-        }
         const sqprops = {
             value: this.state.history[i],
             name: n,
             win: w,
             onClick: () => this.handleClick(i),
         };
+        
         return (
             <Square {...sqprops} />
         );
