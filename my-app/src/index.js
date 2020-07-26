@@ -8,7 +8,7 @@ import o from './content/o.png'
 function Square(props) {
     return (
         <button className="square" onClick={props.onClick}>
-            <img src={props.value} width="50x" height="50px"></img>
+            <img src={props.value} width="50x" height="50px" alt=""></img>
         </button>
     );
 }
@@ -26,7 +26,7 @@ class Board extends React.Component {
     render() {
         return (
             <div>
-                <img src={g} alt="1"></img>
+                <img src={g} alt=""></img>
                 <div className="board-row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
@@ -108,16 +108,18 @@ class Game extends React.Component {
         else { status = 'Next Player: ' + (this.state.xIsNext ? 'X' : 'O'); }
 
         return (
-            <div className="game">
-                <div className="game-board">
-                    <Board 
-                        squares = {current.squares}
-                        onClick={(i) => this.handleClick(i)}
-                    />
-                </div>
-                <div className="game-info">
-                    <div>{status}</div>
-                    <ol>{moves}</ol>
+            <div>
+                <div className="game">
+                    <div className="game-board">
+                        <Board 
+                            squares = {current.squares}
+                            onClick={(i) => this.handleClick(i)}
+                        />
+                    </div>
+                    <div className="game-info">
+                        <div>{status}</div>
+                        <ol>{moves}</ol>
+                    </div>
                 </div>
             </div>
         );

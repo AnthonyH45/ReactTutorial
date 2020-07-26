@@ -1,6 +1,34 @@
-body {
+.body {
     font: 14px "Century Gothic", Futura, sans-serif;
-    margin: 20px;
+    display: block;
+    color: #00ff00;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #303030;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.text_body {
+    display: block;
+    color: #26f9ad;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #303030;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 14px;
+    line-height: 1.5;
+    padding-left: 250px;
+    padding-right: 250px;
 }
 
 ol, ul {
@@ -18,18 +46,18 @@ ol, ul {
 }
 
 .square {
-    background: #fff;
-    border: 1px solid #999;
+    background: grey;
+    border: 4px solid #000000;
     float: left;
-    font-size: 24px;
+    font-size: 52px;
     font-weight: bold;
     line-height: 34px;
-    height: 34px;
+    height: 167px;
     margin-right: -1px;
     margin-top: -1px;
     padding: 0;
     text-align: center;
-    width: 34px;
+    width: 167px;
 }
 
 .win {
