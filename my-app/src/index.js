@@ -25,25 +25,21 @@ class Board extends React.Component {
     }
 
     render() {
-        const winners = this.props.winning;
+        const w = this.props.winning;
+        const rend = () => {
+            var toRet = "<div className=\"board-row\">\n";
+            for (var i = 0; i < 9; i++) {
+                toRet += (i !== 0 && i % 3 === 0) ?
+                    "</div>\n<div className=\"board-row\">\n" + this.renderSquare(i, ((w[0] === i || w[1] === i || w[2] === i) ? true:false) ) : 
+                    "\n" + this.renderSquare(i, ((w[0] === i || w[1] === i || w[2] === i) ? true:false) );
+            }
+            return toRet + `</div>`;
+        };
+
         return (
             <div>
-                <img src={g} alt=""></img>
-                <div className="board-row">
-                    {this.renderSquare(0, (winners[0] === 0 ? true:false) )}
-                    {this.renderSquare(1, (winners[0] === 1 || winners[1] === 1 ? true:false) )}
-                    {this.renderSquare(2, (winners[0] === 2 || winners[2] === 2 ? true:false) )}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3, (winners[0] === 3 || winners[1] === 3 ? true:false) )}
-                    {this.renderSquare(4, (winners[1] === 4 ? true:false) )}
-                    {this.renderSquare(5, (winners[1] === 5 || winners[2] === 5 ? true:false) )}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6, (winners[1] === 6 || winners[2] === 6 ? true:false) )}
-                    {this.renderSquare(7, (winners[0] === 7 || winners[2] === 7 ? true:false) )}
-                    {this.renderSquare(8, (winners[2] === 8 ? true:false) )}
-                </div>
+                <img src={g} alt=""/>
+                {rend()}
             </div>
         );
     }
