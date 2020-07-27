@@ -33,6 +33,9 @@
 
 ol, ul {
     padding-left: 30px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .board-row:after {
@@ -43,6 +46,9 @@ ol, ul {
 
 .status {
     margin-bottom: 10px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .square {
@@ -89,5 +95,11 @@ ol, ul {
 }
 
 .game-info {
-    margin-left: 20px
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.game-board {
+    margin-left: auto;
+    margin-right: auto;
 }
