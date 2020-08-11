@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> index.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Board.html">Board</a></li><li><a href="TicTacToe.Game.html">Game</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>index.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import ReactDOM from 'react-dom'
+import './index.css'
+import g from './content/gdance.gif'
+import x from './content/x.png'
+import o from './content/o.png'
+
+/**
+ * @memberof TicTacToe
+ * @param {props} props contains a props.name for css, props.onClick to handle button clicks, props.value to display 
+ */
+function Square(props) {
+    return (
+        &lt;button className={props.name} onClick={props.onClick}>
+            &lt;img src={props.value} width="50x" height="50px" alt="">&lt;/img>
+        &lt;/button>
+    );
+}
+
+/**
+ * 
+ * @component Board
+ */
+class Board extends React.Component {
+    renderSquare(i,w) {
+        return (
+            &lt;Square 
+                value={this.props.squares[i]}
+                onClick={() => this.props.onClick(i)}
+                name={w ? "win":"square"}
+            />
+        );
+    }
+
+    render() {
+        const w = this.props.winning;
+        const rend = () => {
+            var toRet = "&lt;div className=\"board-row\">\n";
+            for (var i = 0; i &lt; 9; i++) {
+                toRet += (i !== 0 &amp;&amp; i % 3 === 0) ?
+                    "&lt;/div>\n&lt;div className=\"board-row\">\n" + this.renderSquare(i, ((w[0] === i || w[1] === i || w[2] === i) ? true:false) ) : 
+                    "\n" + this.renderSquare(i, ((w[0] === i || w[1] === i || w[2] === i) ? true:false) );
+            }
+            return toRet + `&lt;/div>`;
+        };
+
+        return (
+            &lt;div>
+                &lt;img src={g} alt=""/>
+                {rend()}
+            &lt;/div>
+        );
+    }
+}
+
+/**
+ * @memberof TicTacToe
+ */
+class Game extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            history: [{
+                squares: Array(9).fill(null),
+            }],
+            stepNumber: 0,
+            xIsNext: true,
+        };
+    }
+
+    handleClick(i) {
+        const history = this.state.history.slice(0,this.state.stepNumber + 1);
+        const current = history[history.length - 1];
+        const squares = current.squares.slice();
+        const winner = calculateWinner(squares);
+
+        if (winner[0] || squares[i]) { return; }
+
+        squares[i] = this.state.xIsNext ? x : o;
+
+        this.setState({
+            history: history.concat([{squares: squares}]),
+            stepNumber: history.length,
+            xIsNext: !this.state.xIsNext,
+        });
+    }
+
+    jumpTo(step) {
+        this.setState(
+            {
+                stepNumber: step,
+                xIsNext: (step % 2) === 0,
+            }
+        );
+    }
+
+    render() {
+        const history = this.state.history;
+        const current = history[this.state.stepNumber];
+        const winner = calculateWinner(current.squares);
+
+        const moves = history.map( 
+            (step,move) => {
+                const desc = move ? 
+                    'Go to move #' + move :
+                    'Go to game start';
+                return (
+                    &lt;li key={move}>
+                        &lt;button onClick={() => this.jumpTo(move)}>{desc}&lt;/button>
+                    &lt;/li>
+                );
+            }
+        );
+
+        let status;
+        if (winner[0]) { status = 'Winner: ' + (this.state.xIsNext ? 'O' : 'X'); }
+        else if (this.state.stepNumber === 9) { status = 'Draw :('; }
+        else { status = 'Next Player: ' + (this.state.xIsNext ? 'X' : 'O'); }
+
+        return (
+            &lt;div className="game">
+                &lt;div className="game-board">
+                    &lt;Board 
+                        squares = {current.squares}
+                        onClick={(i) => this.handleClick(i)}
+                        winning={[winner[1],winner[2],winner[3]]}
+                    />
+                &lt;/div>
+                &lt;div className="game-info">
+                    &lt;div>{status}&lt;/div>
+                    &lt;ol>{moves}&lt;/ol>
+                &lt;/div>
+            &lt;/div>
+        );
+    }
+}
+
+ReactDOM.render(
+    &lt;Game />,
+    document.getElementById('root')
+);
+
+function calculateWinner(squares) {
+    const lines = [
+        [0,1,2],
+        [3,4,5],
+        [7,6,8],
+        [0,3,6],
+        [0,4,8],
+        [1,4,7],
+        [2,5,8],
+        [2,4,6],
+    ];
+
+    for (let i = 0; i &lt; lines.length; i++) {
+        const [a,b,c] = lines[i];
+        if (squares[a] &amp;&amp; squares[a] === squares[b] &amp;&amp; squares[a] === squares[c]) {
+            return [squares[a],a,b,c];
+        }
+    }
+
+    return [false, null,null,null];
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.5</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>
