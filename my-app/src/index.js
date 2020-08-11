@@ -8,6 +8,9 @@ import o from './content/o.png'
 /** This function generates a square button 
  *  and represents a Square
  *  @constructor
+ *  @param {any} props props.name is the className for the css <br><br>
+ *                     props.onClick is the function to handle clicks <br><br>
+ *                     props.value is the img to display in the square
 */
 function Square(props) {
     return (
@@ -17,6 +20,9 @@ function Square(props) {
     );
 }
 
+/** This class represents the Board and calls the render for each Square
+ *  @constructor
+*/
 class Board extends React.Component {
     renderSquare(i,w) {
         return (

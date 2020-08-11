@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Square.html">Square</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Board.html">Board</a></li><li><a href="Square.html">Square</a></li></ul></div>
                 
             </nav>
         </div>
@@ -95,6 +95,9 @@ import o from './content/o.png'
 /** This function generates a square button 
  *  and represents a Square
  *  @constructor
+ *  @param {any} props props.name is the className for the css &lt;br>&lt;br>
+ *                     props.onClick is the function to handle clicks &lt;br>&lt;br>
+ *                     props.value is the img to display in the square
 */
 function Square(props) {
     return (
@@ -104,6 +107,9 @@ function Square(props) {
     );
 }
 
+/** This class represents the Board and calls the render for each Square
+ *  @constructor
+*/
 class Board extends React.Component {
     renderSquare(i,w) {
         return (
