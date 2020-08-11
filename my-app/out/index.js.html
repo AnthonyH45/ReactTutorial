@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Board.html">Board</a></li><li><a href="Square.html">Square</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Board.html">Board</a></li><li><a href="Game.html">Game</a></li><li><a href="Square.html">Square</a></li></ul></div>
                 
             </nav>
         </div>
@@ -131,7 +131,7 @@ class Board extends React.Component {
 
     /**
      * @description renders the board as 3 rows of 3 squares
-     * @param {props} props @see constructor
+     * @param {props} props see constructor
      */
     render() {
         const winners = this.props.winning;
@@ -158,6 +158,9 @@ class Board extends React.Component {
     }
 }
 
+/**
+ * This class represents the Game logic, it handles the button clicks, keep tracks of history, 
+ */
 class Game extends React.Component {
     constructor(props) {
         super(props);

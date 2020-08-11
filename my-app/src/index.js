@@ -71,6 +71,9 @@ class Board extends React.Component {
     }
 }
 
+/**
+ * This class represents the Game logic, it handles the button clicks, keep tracks of history, 
+ */
 class Game extends React.Component {
     constructor(props) {
         super(props);
