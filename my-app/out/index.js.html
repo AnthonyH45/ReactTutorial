@@ -109,8 +109,16 @@ function Square(props) {
 
 /** This class represents the Board and calls the render for each Square
  *  @constructor
+ *  @param {any} props props.squares is the current array of squares&lt;br>&lt;br>
+ *                     props.onClick is the function to handle button clicks&lt;br>&lt;br>
+ *                     props.winning is the winnning indices of the squares&lt;br>&lt;br>
 */
 class Board extends React.Component {
+    /**
+     * 
+     * @param {integer} i which square is this
+     * @param {boolean} w is this is a winning square
+     */
     renderSquare(i,w) {
         return (
             &lt;Square 
@@ -121,22 +129,30 @@ class Board extends React.Component {
         );
     }
 
+    /**
+     * @description renders the board as 3 rows of 3 squares
+     * @param {props} props @see constructor
+     */
     render() {
-        const w = this.props.winning;
-        const rend = () => {
-            var toRet = "&lt;div className=\"board-row\">\n";
-            for (var i = 0; i &lt; 9; i++) {
-                toRet += (i !== 0 &amp;&amp; i % 3 === 0) ?
-                    "&lt;/div>\n&lt;div className=\"board-row\">\n" + this.renderSquare(i, ((w[0] === i || w[1] === i || w[2] === i) ? true:false) ) : 
-                    "\n" + this.renderSquare(i, ((w[0] === i || w[1] === i || w[2] === i) ? true:false) );
-            }
-            return toRet + `&lt;/div>`;
-        };
-
+        const winners = this.props.winning;
         return (
             &lt;div>
-                &lt;img src={g} alt=""/>
-                {rend()}
+                &lt;img src={g} alt="">&lt;/img>
+                &lt;div className="board-row">
+                    {this.renderSquare(0, (winners[0] === 0 ? true:false) )}
+                    {this.renderSquare(1, (winners[0] === 1 || winners[1] === 1 ? true:false) )}
+                    {this.renderSquare(2, (winners[0] === 2 || winners[2] === 2 ? true:false) )}
+                &lt;/div>
+                &lt;div className="board-row">
+                    {this.renderSquare(3, (winners[0] === 3 || winners[1] === 3 ? true:false) )}
+                    {this.renderSquare(4, (winners[1] === 4 ? true:false) )}
+                    {this.renderSquare(5, (winners[1] === 5 || winners[2] === 5 ? true:false) )}
+                &lt;/div>
+                &lt;div className="board-row">
+                    {this.renderSquare(6, (winners[1] === 6 || winners[2] === 6 ? true:false) )}
+                    {this.renderSquare(7, (winners[0] === 7 || winners[2] === 7 ? true:false) )}
+                    {this.renderSquare(8, (winners[2] === 8 ? true:false) )}
+                &lt;/div>
             &lt;/div>
         );
     }

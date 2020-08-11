@@ -22,11 +22,16 @@ function Square(props) {
 
 /** This class represents the Board and calls the render for each Square
  *  @constructor
- *  @param {any} props props.squares <br><br>
- *                     props.onClick <br><br>
- *                     props.winning <br><br>
+ *  @param {any} props props.squares is the current array of squares<br><br>
+ *                     props.onClick is the function to handle button clicks<br><br>
+ *                     props.winning is the winnning indices of the squares<br><br>
 */
 class Board extends React.Component {
+    /**
+     * 
+     * @param {integer} i which square is this
+     * @param {boolean} w is this is a winning square
+     */
     renderSquare(i,w) {
         return (
             <Square 
@@ -37,6 +42,10 @@ class Board extends React.Component {
         );
     }
 
+    /**
+     * @description renders the board as 3 rows of 3 squares
+     * @param {props} props see constructor
+     */
     render() {
         const winners = this.props.winning;
         return (
