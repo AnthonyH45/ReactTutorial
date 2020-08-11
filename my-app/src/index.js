@@ -5,10 +5,6 @@ import g from './content/gdance.gif'
 import x from './content/x.png'
 import o from './content/o.png'
 
-/**
- * @memberof TicTacToe
- * @param {props} props contains a props.name for css, props.onClick to handle button clicks, props.value to display 
- */
 function Square(props) {
     return (
         <button className={props.name} onClick={props.onClick}>
@@ -17,10 +13,6 @@ function Square(props) {
     );
 }
 
-/**
- * 
- * @component Board
- */
 class Board extends React.Component {
     renderSquare(i,w) {
         return (
@@ -53,9 +45,6 @@ class Board extends React.Component {
     }
 }
 
-/**
- * @memberof TicTacToe
- */
 class Game extends React.Component {
     constructor(props) {
         super(props);
