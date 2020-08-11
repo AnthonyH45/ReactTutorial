@@ -5,6 +5,10 @@ import g from './content/gdance.gif'
 import x from './content/x.png'
 import o from './content/o.png'
 
+/** This function generates a square button 
+ *  and represents a Square
+ *  @constructor
+*/
 function Square(props) {
     return (
         <button className={props.name} onClick={props.onClick}>
